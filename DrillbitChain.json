@@ -1,0 +1,175 @@
+{
+    "ApplicationName": "DrillbitChain",
+    "DisplayName": "DrillbitChain",
+    "Description": "An app for haunted hackathon.",
+    "ApplicationRoles": [
+        {
+            "Name": "Engineer",
+            "Description": "Engineer reviewing picture and dull rating."
+        },
+        {
+            "Name": "PIC",
+            "Description": "Person in charge."
+        },
+        {
+            "Name": "Vendor",
+            "Description": "Vendor."
+        },
+        {
+            "Name": "Superintendent",
+            "Description": "Superintendent."
+        }
+    ],
+    "Workflows": [
+        {
+            "Name": "DrillbitChain",
+            "DisplayName": "Confirm Dull Rating",
+            "Description": "A simple workflow to send a pic of drill bit and take further action if necessary.",
+            "Initiators": [
+                "PIC"
+            ],
+            "StartState": "Request",
+            "Properties": [
+                {
+                    "Name": "State",
+                    "DisplayName": "State",
+                    "Description": "Holds the state of the contract.",
+                    "Type": {
+                        "Name": "state"
+                    }
+                },
+                {
+                    "Name": "PIC",
+                    "DisplayName": "PIC",
+                    "Description": "A person sending a request.",
+                    "Type": {
+                        "Name": "PIC"
+                    }
+                },
+                {
+                    "Name": "Engineer",
+                    "DisplayName": "Engineer",
+                    "Description": "A person sending a response.",
+                    "Type": {
+                        "Name": "Engineer"
+                    }
+                },
+                {
+                    "Name": "RequestMessage",
+                    "DisplayName": "Request Message",
+                    "Description": "A request message.",
+                    "Type": {
+                        "Name": "string"
+                    }
+                },
+                {
+                    "Name": "ResponseMessage",
+                    "DisplayName": "Response Message",
+                    "Description": "A response message.",
+                    "Type": {
+                        "Name": "string"
+                    }
+                }
+            ],
+            "Constructor": {
+                "Parameters": [
+                    {
+                        "Name": "message",
+                        "Description": "...",
+                        "DisplayName": "Request Message",
+                        "Type": {
+                            "Name": "string"
+                        }
+                    }
+                ]
+            },
+            "Functions": [
+                {
+                    "Name": "SendRequest",
+                    "DisplayName": "Request",
+                    "Description": "...",
+                    "Parameters": [
+                        {
+                            "Name": "requestMessage",
+                            "Description": "...",
+                            "DisplayName": "Request Message",
+                            "Type": {
+                                "Name": "string"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "Name": "SendResponse",
+                    "DisplayName": "Response",
+                    "Description": "...",
+                    "Parameters": [
+                        {
+                            "Name": "responseMessage",
+                            "Description": "...",
+                            "DisplayName": "Response Message",
+                            "Type": {
+                                "Name": "string"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "States": [
+                {
+                    "Name": "Request",
+                    "DisplayName": "Request",
+                    "Description": "...",
+                    "PercentComplete": 50,
+                    "Value": 0,
+                    "Style": "Success",
+                    "Transitions": [
+                        {
+                            "AllowedRoles": [
+                                "Engineer"
+                            ],
+                            "AllowedInstanceRoles": [],
+                            "Description": "...",
+                            "Function": "SendResponse",
+                            "NextStates": [
+                                "Respond"
+                            ],
+                            "DisplayName": "Send Response"
+                        }
+                    ]
+                },
+                {
+                    "Name": "Respond",
+                    "DisplayName": "Respond",
+                    "Description": "...",
+                    "PercentComplete": 100,
+                    "Value" : 1,
+                    "Style": "Success",
+                    "Transitions": []
+                },
+                {
+                    "Name": "Initiated",
+                    "DisplayName": "Initiated",
+                    "Description": "...",
+                    "PercentComplete": 33,
+                    "Value": 2,
+                    "Style": "Success",
+                    "Transitions": [
+                        {
+                            "AllowedRoles": [
+                                "PIC"
+                            ],
+                            "AllowedInstanceRoles": [],
+                            "Description": "...",
+                            "Function": "SendResponse",
+                            "NextStates": [
+                                "Respond"
+                            ],
+                            "DisplayName": "Respond to PIC's picture."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
